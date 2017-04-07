@@ -1,9 +1,9 @@
 package com.bymankind.fragmentrecycleview;
 
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.support.design.widget.TabLayout;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), MainActivity.this);
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
     @Override
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class PagerAdapter extends FragmentPagerAdapter {
+
         String tabTitles[] = new String[]{"First Tab", "Second Tab", "Third Tab"};
         Context context;
 
@@ -69,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             this.context = context;
         }
 
-
         @Override
         public int getCount() {
             return tabTitles.length;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+
             switch (position) {
                 case 0:
                     return new BlankFragment();
@@ -85,18 +87,19 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     return new BlankFragment();
             }
+
             return null;
         }
 
 
         @Override
-        public CharSequence getPageTitle(int position) {
+        public CharSequence getPageTitle(int position){
             return tabTitles[position];
         }
 
-        public View getTabView(int position) {
+        public View getTabView(int position){
             View tab = LayoutInflater.from(MainActivity.this).inflate(R.layout.custom_tab, null);
-            TextView tv = (TextView) findViewById(R.id.custom_text);
+            TextView tv = (TextView) tab.findViewById(R.id.custom_text);
             tv.setText(tabTitles[position]);
             return tab;
         }
